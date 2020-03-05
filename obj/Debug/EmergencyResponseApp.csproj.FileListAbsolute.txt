@@ -1,0 +1,4 @@
+C:\Users\ARNOLD\source\repos\EmergencyResponseApp\bin\Debug\EmergencyResponseApp.pdb
+C:\Users\ARNOLD\source\repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.csprojAssemblyReference.cache
+C:\Users\ARNOLD\source\repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.dll
+C:\Users\ARNOLD\source\repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.pdb

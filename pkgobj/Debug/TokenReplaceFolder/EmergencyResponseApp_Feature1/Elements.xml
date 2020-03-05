@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="RootModule">
+    <File Path="src\Default.aspx" Url="src/Default.aspx" ReplaceContent="TRUE" />
+    <File Path="src\app\emergencies\emergencies.js" Url="src/app/emergencies/emergencies.js" ReplaceContent="TRUE" />
+    <File Path="src\app\App.js" Url="src/app/App.js" ReplaceContent="TRUE" />
+    <File Path="src\common\directives\ui-bootstrap-dialogs.js" Url="src/common/directives/ui-bootstrap-dialogs.js" ReplaceContent="TRUE" />
+    <File Path="src\common\directives\spinner\loading-spinner.js" Url="src/common/directives/spinner/loading-spinner.js" ReplaceContent="TRUE" />
+    <File Path="src\common\directives\spinner\loading-spinner.css" Url="src/common/directives/spinner/loading-spinner.css" ReplaceContent="TRUE" />
+    <File Path="src\common\directives\pagination\dirPagination.js" Url="src/common/directives/pagination/dirPagination.js" ReplaceContent="TRUE" />
+    <File Path="src\common\services\countrydirectors.js" Url="src/common/services/countrydirectors.js" ReplaceContent="TRUE" />
+    <File Path="src\common\services\emergencies.js" Url="src/common/services/emergencies.js" ReplaceContent="TRUE" />
+    <File Path="src\common\utilities\sp-ng-module.js" Url="src/common/utilities/sp-ng-module.js" ReplaceContent="TRUE" />
+    <File Path="src\common\utilities\utilities.js" Url="src/common/utilities/utilities.js" ReplaceContent="TRUE" />
+    <File Path="src\css\App.css" Url="src/css/App.css" ReplaceContent="TRUE" />
+    <File Path="src\app\emergencies\emergencies-db.tpl.html" Url="src/app/emergencies/emergencies-db.tpl.html" ReplaceContent="TRUE" />
+    <File Path="src\app\emergencies\emergencies-list.tpl.html" Url="src/app/emergencies/emergencies-list.tpl.html" ReplaceContent="TRUE" />
+    <File Path="src\app\emergencies\emergencies-add.tpl.html" Url="src/app/emergencies/emergencies-add.tpl.html" ReplaceContent="TRUE" />
+    <File Path="src\common\directives\pagination\dirPagination.tpl.html" Url="src/common/directives/pagination/dirPagination.tpl.html" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

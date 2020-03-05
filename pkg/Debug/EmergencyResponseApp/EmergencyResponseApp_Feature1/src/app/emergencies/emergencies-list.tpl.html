@@ -1,0 +1,173 @@
+﻿<div class="row">
+    <div class="col-md-8 page-font">
+        <i class="fa fa-exclamation-triangle"></i> Emergency Response Details
+    </div>
+    <div class="col-md-4">
+        <div class="pull-right">
+            <a ng-href="{{ctrl.hostWebUrl}}" class="btn btn-sm btn-warning">
+                <i class="fa fa-plus-circle"></i>
+                Go Back to Team Site
+            </a>
+            <a href="#addEmergency" class="btn btn-sm btn-success">
+                <i class="fa fa-plus-circle"></i>
+                Add Emergency
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <a href="#listEmergencies/0">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-asterisk gi-3X"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge ng-binding">{{ctrl.totalreq}}</div>
+                            <div>Total Requests</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="#listEmergencies/1">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-time gi-3X"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge ng-binding">{{ctrl.countrydir}}</div>
+                            <div>Country Director</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="#listEmergencies/2">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-thumbs-up gi-3X"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge ng-binding">{{ctrl.security}}</div>
+                            <div>Security</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="#listEmergencies/3">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-ok gi-3X"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge ng-binding">{{ctrl.completed}}</div>
+                            <div>Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="well">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label" for="title">
+                    Start Date:
+                </label>
+                <input class="form-control" id="title" name="title" type="date" ng-model="ctrl.sStartDate">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label" for="title">
+                    End Date:
+                </label>
+                <input class="form-control" id="title" name="title" type="date" ng-model="ctrl.sEndDate">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label class="control-label">Filter by Emergency Report Date</label>
+            <button class="btn btn-sm btn-primary form-control" ng-disabled="!ctrl.sStartDate || !ctrl.sEndDate || (ctrl.sStartDate > ctrl.sEndDate)" ng-click="ctrl.filterByEmergencyReportDates()" type="button">
+                <i class="fa fa-filter"></i> Filter
+            </button>
+        </div>
+        <div class="col-md-3">
+            <label class="control-label">&nbsp;</label>
+            <button class="btn btn-sm btn-success form-control" ng-click="ctrl.init()" type="button">
+                <i class="fa fa-refresh"></i>
+                Refresh
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row ">
+    <div class="col-md-12">
+        <table class="table table-bordered table-condensed table-striped table-hover">
+            <tbody>
+                <tr>
+                    <th>Date Reported</th>
+                    <th style="min-width: 150px;">Emergency Country</th>
+                    <th>Emergency Title</th>
+                    <th>Reported By</th>
+                    <th>Status</th>
+                    <th style="width: 110px"></th>
+                </tr>
+                <tr dir-paginate="emerg in ctrl.emergencies | orderBy: '-created' | itemsPerPage: 6">
+                    <td><span>{{emerg.created | date: 'dd/MM/yyyy HH:mm:ss' : 'africa/nairobi'}}</span></td>
+                    <td><span>{{emerg.country}}</span></td>
+                    <td><span>{{emerg.title}}</span></td>
+                    <td><span>{{emerg.author.title}}</span></td>
+                    <td><span>{{emerg.status}}</span></td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-xs btn-warning dropdown-toggle" type="button" data-toggle="dropdown">
+                                Action
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#viewEmergency/{{emerg.id}}">View</a></li>
+                                <li ng-if="emerg.status == 'Director'">
+                                    <a href="#addCountryDirResponse/{{emerg.id}}">Country Dir</a>
+                                </li>
+                                <li ng-if="emerg.status == 'Security' && ctrl.userinsecurity">
+                                    <a href="#/addSecurityResponse/{{emerg.id}}">Security</a>
+                                </li>
+                                <li ng-if="emerg.status == 'Director' && emerg.author.id == ctrl.userid">
+                                    <a href="#listEmergencies" ng-click="ctrl.deleteEmergency(emerg.id)">Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-12">
+        <dir-pagination-controls boundary-links="true" template-url="common/directives/pagination/dirPagination.tpl.html">
+        </dir-pagination-controls>
+    </div>
+</div>

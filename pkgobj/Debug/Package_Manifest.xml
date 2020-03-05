@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="085d6773-b50b-48e2-aa91-b3bd59b42a21" SharePointProductVersion="16.0">
+  <FeatureManifests>
+    <FeatureManifest Location="EmergencyResponseApp_Feature1\Feature.xml" />
+  </FeatureManifests>
+</Solution>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Type="ElementManifest" />
+    <ProjectItemFile Source="src\Default.aspx" Target="src\" Type="ElementFile" />
+    <ProjectItemFile Source="src\app\emergencies\emergencies.js" Target="src\app\emergencies\" Type="ElementFile" />
+    <ProjectItemFile Source="src\app\App.js" Target="src\app\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\directives\ui-bootstrap-dialogs.js" Target="src\common\directives\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\directives\spinner\loading-spinner.js" Target="src\common\directives\spinner\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\directives\spinner\loading-spinner.css" Target="src\common\directives\spinner\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\directives\pagination\dirPagination.js" Target="src\common\directives\pagination\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\services\countrydirectors.js" Target="src\common\services\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\services\emergencies.js" Target="src\common\services\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\utilities\sp-ng-module.js" Target="src\common\utilities\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\utilities\utilities.js" Target="src\common\utilities\" Type="ElementFile" />
+    <ProjectItemFile Source="src\css\App.css" Target="src\css\" Type="ElementFile" />
+    <ProjectItemFile Source="src\app\emergencies\emergencies-db.tpl.html" Target="src\app\emergencies\" Type="ElementFile" />
+    <ProjectItemFile Source="src\app\emergencies\emergencies-list.tpl.html" Target="src\app\emergencies\" Type="ElementFile" />
+    <ProjectItemFile Source="src\app\emergencies\emergencies-add.tpl.html" Target="src\app\emergencies\" Type="ElementFile" />
+    <ProjectItemFile Source="src\common\directives\pagination\dirPagination.tpl.html" Target="src\common\directives\pagination\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

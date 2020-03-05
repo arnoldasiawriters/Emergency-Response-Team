@@ -1,0 +1,490 @@
+﻿<div class="bootstrap-iso ng-scope">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-left">
+                    <a href="#listEmergencies" class="btn btn-sm btn-success">
+                        <i class="fa fa-angle-double-left"></i>
+                        Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'add'">ADD EMERGENCY DETAILS</div>
+        <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'cdir'">ADD COUNTRY DIRECTOR RESPONSE</div>
+        <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'sec'">ADD SECURITY COMMITTEE RESPONSE</div>
+        <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'view'">VIEW EMERGENCY RESPONSE DETAILS</div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">TITLE OF THE DISASTER</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label">Emergency Title</label>
+                        <input class="form-control" type="text"
+                               name="title"
+                               ng-model="ctrl.emergency.title"
+                               ng-required="true"
+                               placeholder="Enter a title for the disaster you are reporting."
+                               ng-disabled="ctrl.action != 'add'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">NATURE OF DISASTER</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Primary Disaster</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="primarydisaster"
+                                          ng-model="ctrl.emergency.primarydisaster"
+                                          placeholder="What is the nature of the disaster? Fast onset/ slow onset. Is it something we have the experience/ capacity to respond to?"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          ng-required="true">
+                                </textarea>
+                                <div class="btn-group pull-right dirres ng-scope" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primarydisaster" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primarydisaster" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Secondary Disaster</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="secondarydisaster"
+                                          ng-model="ctrl.emergency.secondarydisaster"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          placeholder="Is there a risk of secondary disasters linked to the primary disaster? Yes: these can these be addressed without security implications? No: immediate response would pose high risk (refer to security section).">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.secondarydisaster" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.secondarydisaster" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">LOCATION</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Emergency Country</label>
+                                <input type="text" value="Kenya" ng-hide="ctrl.action == 'add'" disabled="disabled">
+                                <select ng-model="ctrl.emergency.country"
+                                        ng-options="x.country for x in ctrl.countrydirectors track by x.id"
+                                        name="countrydirector"
+                                        class="select form-control"
+                                        ng-show="ctrl.action == 'add'"
+                                        ng-required="true">
+                                    <option value="" class="" selected="selected">-- Choose Affected Country --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">Disaster Location</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          name="locationofdisaster" 
+                                          ng-model="ctrl.emergency.disasterlocation" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Where has the disaster happened? Is it within a geographical area where we have programmes/ have capacity to reach?">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.disasterlocation" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.disasterlocation" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Primary Actors Affected?</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          name="primaryactorsaffected" 
+                                          ng-model="ctrl.emergency.primaryactorsaffected" 
+                                          placeholder="Have our primary actors been affected?" 
+                                          ng-disabled="ctrl.action != 'add'">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primaryactorsaffected" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primaryactorsaffected" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">IMPACTS AND NEEDS</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Impact</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          name="impact" 
+                                          ng-model="ctrl.emergency.impact" 
+                                          ng-required="true" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Is the level of impact according to available information significant enough to warrant a response: Lives lost/ injuries/ livelihood damage?">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.impact" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.impact" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Primary Needs</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          ng-required="true" 
+                                          name="primaryneeds" 
+                                          ng-model="ctrl.emergency.primaryneeds" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="What are the current needs (top line needs identified in early assessments by VSO/ agencies on the ground?). Do we have capacity/ experience in supporting any of those needs?">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primaryneeds" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primaryneeds" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Primary Needs Met</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          name="primaryneedsmet" 
+                                          ng-model="ctrl.emergency.primaryneedsmet" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Are primary needs being met by other actors? Government/ local government/ others.">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primaryneedsmet" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.primaryneedsmet" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Emerging Needs</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          name="emergingneeds" 
+                                          ng-model="ctrl.emergency.emergingneeds" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="What do you predict to be emerging needs (based on secondary disasters/ risks). Do we have the capacity/ experience to support any of those needs?">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.emergingneeds" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.emergingneeds" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">CAPACITY</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Partners Capacity</label>
+                                <textarea class="form-control"
+                                          rows="4" 
+                                          ng-model="ctrl.emergency.partnerscapacity" 
+                                          name="partnerscapacity" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Do we have partners on the ground in the area of location? Do they have capacity to support a response? (Consider this may have been compromised by the disaster) If they are not in the areas – do they have the ability to deploy to the area?">                                    
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.partnerscapacity" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.partnerscapacity" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Existing Programmes</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          ng-model="ctrl.emergency.existingprogrammes" 
+                                          name="existingprogrammes" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Do we have existing programmes which could be adapted to support a response or would the response need to be additional to existing work?">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.existingprogrammes" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.existingprogrammes" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Staff Capacity</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          ng-model="ctrl.emergency.staffcapacity" 
+                                          name="staffcapacity" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="If additional, do we have staff capacity to support needs assessment, project design, coordination and management? (Consider implications for ongoing work)">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.staffcapacity" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.staffcapacity" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Community Volunteers</label>
+                                <textarea class="form-control"
+                                          rows="4" 
+                                          ng-model="ctrl.emergency.communityvolunteers" 
+                                          name="communityvolunteers" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Do we have community volunteers on the ground? (If yes, consider their support needs? Can any of these be met through support from VSO?)">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.communityvolunteers" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.communityvolunteers" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">National Volunteers</label>
+                                <textarea class="form-control"
+                                          rows="5" 
+                                          ng-model="ctrl.emergency.nationalvolunteers" 
+                                          name="nationalvolunteers" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Do we have national volunteers on the ground already working without security risk/ can we deploy?(Consider; if on the ground, consider the skills they are contributing and support needs/ what security needs. If to be deployed, consider what skills they can meet) No: On the ground but high risk/ Can’t deploy due to high  risks: consider not deploying/ advising evacuation)">
+                                </textarea>
+                                <div class="btn-group pull-right dirres ng-scope" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.nationalvolunteers" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.nationalvolunteers" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">International Volunteers</label>
+                                <textarea class="form-control" 
+                                          rows="5" 
+                                          ng-model="ctrl.emergency.internationalvolunteers" 
+                                          name="internationalvolunteers" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Do we have international volunteers on the ground/ that can be deployed?(If on the ground, consider how they responding, what skills are they contributing and what are their support/ security needs. If to be deployed what skills could they bring if deployed? (Security prompt: If security risks: apply security assessment – if high risk consider not deploying/ advising evacuation)">
+                                </textarea>
+                                <div class="btn-group pull-right dirres ng-scope" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.internationalvolunteers" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.internationalvolunteers" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">COORDINATION</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">National level Coordination</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          ng-model="ctrl.emergency.nationalcoordination" 
+                                          name="nationalcoordination" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Are we engaging in national level coordination structures (government/ non-government or are there opportunities to coordinate?">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.nationalcoordination" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.nationalcoordination" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Agencies Identified</label>
+                                <textarea class="form-control" 
+                                          rows="4" 
+                                          ng-model="ctrl.emergency.agenciesidentified" 
+                                          name="agenciesidentified" 
+                                          ng-disabled="ctrl.action != 'add'" 
+                                          placeholder="Have we identified any agencies with which it would be advisable to collaborate/ coordinate (working in same target areas/ meeting similar/ complementary needs.">                                    </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.agenciesidentified" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.agenciesidentified" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="ctrl.action != 'add'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-title">COUNTRY DIRECTOR RESPONSE</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">General Comments</label>
+                                    <textarea class="form-control" 
+                                              rows="4" 
+                                              ng-model="ctrl.emergresdir.generalcomments" 
+                                              name="generalcomments" 
+                                              ng-disabled="ctrl.action != 'cdir'" 
+                                              placeholder="Country Director Recommendation: Go/No (top line initial response concept)">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="control-label">Moral Responsibility</label>
+                                <div class="form-group">
+                                    <textarea class="form-control"
+                                              rows="4" 
+                                              ng-model="ctrl.emergresdir.moralresponsibiity" 
+                                              name="moralresponsibiity" 
+                                              ng-disabled="ctrl.action != 'cdir'">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Reputation </label>
+                                <div class="form-group">
+                                    <textarea class="form-control"
+                                              rows="4" 
+                                              ng-model="ctrl.emergresdir.reputation" 
+                                              name="reputation" 
+                                              ng-disabled="ctrl.action != 'cdir'">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Accountability</label>
+                                <div class="form-group">
+                                    <textarea class="form-control" 
+                                              rows="4" 
+                                              ng-model="ctrl.emergresdir.accountability" 
+                                              name="accountability" 
+                                              ng-disabled="ctrl.action != 'cdir'">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Programme growth</label>
+                                <div class="form-group">
+                                    <textarea class="form-control"
+                                              rows="4" 
+                                              ng-model="ctrl.emergresdir.programgrowth" 
+                                              name="programgrowth" 
+                                              ng-disabled="ctrl.action != 'cdir'">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="ctrl.action != 'add' && (ctrl.emergency.status == 'Security' || ctrl.emergency.status == 'Completed')">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-title">SAFETY COMMITTEE RESPONSE</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Safety Committee Comments</label>
+                                    <textarea class="form-control"
+                                              rows="4" 
+                                              ng-model="ctrl.emergressec.safetycomments" 
+                                              name="generalcomments" ng-disabled="ctrl.action != 'sec'" 
+                                              placeholder="Safety Committee Recommendation">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer clearfix ng-hide" ng-show="ctrl.action == 'add' || ctrl.action == 'cdir' || ctrl.action == 'sec'">
+            <div class="form-group pull-right">
+                <a href="" class="btn btn-success" ng-disabled="frm.$invalid" ng-click="ctrl.addEmergency()">Save and close</a>
+                <a href="#listEmergencies" class="btn btn-warning ">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
