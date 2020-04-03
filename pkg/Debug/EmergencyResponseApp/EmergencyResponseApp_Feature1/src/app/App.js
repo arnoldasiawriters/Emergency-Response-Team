@@ -41,6 +41,11 @@
                     controller: 'emergencyCtrl as ctrl',
                     param: 'sec'
                 })
+                .when('/addProgrammesResponse/:id', {
+                    templateUrl: 'app/emergencies/emergencies-add.tpl.html',
+                    controller: 'emergencyCtrl as ctrl',
+                    param: 'hop'
+                })
                 .otherwise({
                     redirectTo: '/listEmergencies'
                 });

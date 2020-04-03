@@ -35,13 +35,13 @@
         </a>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
         <a href="#listEmergencies/1">
-            <div class="panel panel-info">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="glyphicon glyphicon-time gi-3X"></i>
+                            <i class="glyphicon glyphicon-home gi-3X"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge ng-binding">{{ctrl.countrydir}}</div>
@@ -53,13 +53,13 @@
         </a>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
         <a href="#listEmergencies/2">
-            <div class="panel panel-success">
+            <div class="panel panel-warning">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="glyphicon glyphicon-thumbs-up gi-3X"></i>
+                            <i class="glyphicon glyphicon-certificate gi-3X"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge ng-binding">{{ctrl.security}}</div>
@@ -71,9 +71,27 @@
         </a>
     </div>
 
+    <div class="col-md-2">
+        <a href="#listEmergencies/4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-align-justify gi-3X"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge ng-binding">{{ctrl.programmes}}</div>
+                            <div>Programmes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
     <div class="col-md-3">
         <a href="#listEmergencies/3">
-            <div class="panel panel-warning">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
@@ -155,6 +173,9 @@
                                 </li>
                                 <li ng-if="emerg.status == 'Security' && ctrl.userinsecurity">
                                     <a href="#/addSecurityResponse/{{emerg.id}}">Security</a>
+                                </li>
+                                <li ng-if="emerg.status == 'Programmes' && ctrl.userinprogrammes">
+                                    <a href="#/addProgrammesResponse/{{emerg.id}}">Programmes</a>
                                 </li>
                                 <li ng-if="emerg.status == 'Director' && emerg.author.id == ctrl.userid">
                                     <a href="#listEmergencies" ng-click="ctrl.deleteEmergency(emerg.id)">Delete</a>

@@ -22,6 +22,7 @@
                     ctrl.emergency = res.emerg;
                     ctrl.emergresdir = res.emerdir;
                     ctrl.emergressec = res.emersec;
+                    ctrl.emergreshop = res.emerhop;
                     spinnerService.closeAll();
                 })
                 .catch(function (error) {
@@ -33,22 +34,26 @@
         promises.push(countrydirsvc.getAllItems());
         promises.push(emergenciesSvc.getAllItems());
         promises.push(emergenciesSvc.checkIfUserSecurity());
+        promises.push(emergenciesSvc.checkIfUserHOP());
 
         $q.all(promises)
             .then(function (results) {
                 ctrl.countrydirectors = results[0];
                 ctrl.emergencies = results[1];
                 ctrl.userinsecurity = results[2];
+                ctrl.userinprogrammes = results[3];
                 ctrl.filterEmergencies = _.cloneDeep(ctrl.emergencies);
 
                 ctrl.totalreq = 0;
                 ctrl.countrydir = 0;
                 ctrl.security = 0;
+                ctrl.programmes = 0;
                 ctrl.completed = 0;
 
                 ctrl.totalreq = ctrl.emergencies.length;
                 ctrl.countrydir = _.filter(ctrl.emergencies, ['status', 'Director']).length;
                 ctrl.security = _.filter(ctrl.emergencies, ['status', 'Security']).length;
+                ctrl.programmes = _.filter(ctrl.emergencies, ['status', 'Programmes']).length;
                 ctrl.completed = _.filter(ctrl.emergencies, ['status', 'Completed']).length;
 
                 //if (ctrl.action == 'dash' && ctrl.emergencies.length > 0) {
@@ -66,6 +71,8 @@
                         ctrl.emergencies = _.filter(ctrl.emergencies, ['status', 'Security']);
                     } else if ($routeParams.id == 3) {
                         ctrl.emergencies = _.filter(ctrl.emergencies, ['status', 'Completed']);
+                    } else if ($routeParams.id == 4) {
+                        ctrl.emergencies = _.filter(ctrl.emergencies, ['status', 'Programmes']);
                     }
                 }
                 spinnerService.closeAll();
@@ -110,6 +117,19 @@
                             .then(function (res) {
                                 ctrl.emergencies = res;
                                 UtilService.showSuccessMessage('#notification-area', 'Safety Committee Response Added Successfully!');
+                                $location.path("/listEmergencies");
+                                spinnerService.closeAll();
+                            })
+                            .catch(function (error) {
+                                $dialogAlert(error, 'Unable to add record');
+                            });
+                    } else if (ctrl.action == 'hop') {
+                        ctrl.emergreshop.id = $routeParams.id;
+                        emergenciesSvc
+                            .addProgrammesComments(ctrl.emergreshop)
+                            .then(function (res) {
+                                ctrl.emergencies = res;
+                                UtilService.showSuccessMessage('#notification-area', 'Programmes Response Added Successfully!');
                                 $location.path("/listEmergencies");
                                 spinnerService.closeAll();
                             })

@@ -7,10 +7,10 @@
 
     EmergenciesSvcFunction.$inject = ['$q', 'ShptRestService'];
     function EmergenciesSvcFunction($q, ShptRestService) {
-        var svc = this;        
+        var svc = this;
         var curUserName = _spPageContextInfo.userDisplayName;
         var curUserId = _spPageContextInfo.userId;
-        
+
         var emergList = null;
         var listname = 'EmergencyResponseDetails';
         svc.hostWebUrl = ShptRestService.hostWebUrl;
@@ -61,6 +61,12 @@
                 InternationalVolunteers: emerg.internationalvolunteers,
                 NationalCoordination: emerg.nationalcoordination,
                 AgenciesIdentified: emerg.agenciesidentified,
+                ProcurementNeeded: emerg.procurementneeded,
+                ProcurementDeviation: emerg.procurementdeviation,
+                ProcurementExperience: emerg.procurementexperience,
+                ProcurementHighRiskItems: emerg.procurementhighriskitems,
+                ProcurementIssues: emerg.procurementissues,
+                ProcurementConsiderations: emerg.procurementconsiderations,
                 ResponseStatus: 'Director'
             };
 
@@ -105,11 +111,17 @@
                 InternationalVolunteers: emergresdir.internationalvolunteers,
                 NationalCoordination: emergresdir.nationalcoordination,
                 AgenciesIdentified: emergresdir.agenciesidentified,
+                ProcurementNeeded: emergresdir.procurementneeded,
+                ProcurementDeviation: emergresdir.procurementdeviation,
+                ProcurementExperience: emergresdir.procurementexperience,
+                ProcurementHighRiskItems: emergresdir.procurementhighriskitems,
+                ProcurementIssues: emergresdir.procurementissues,
+                ProcurementConsiderations: emergresdir.procurementconsiderations,
+                BudgetImplications: emergresdir.budgetimplications,
                 GeneralComments: emergresdir.generalcomments,
-                MoralResponsibility: emergresdir.moralresponsibiity,
-                Reputation: emergresdir.reputation,
-                Accountability: emergresdir.accountability,
-                ProgramGrowth: emergresdir.programgrowth
+                ResponseManagerContact: emergresdir.responsemanagercontact,
+                DutyofCareContact: emergresdir.dutyofcarecontact,
+                CommunicationsContact: emergresdir.communicationscontact
             };
 
             ShptRestService
@@ -121,7 +133,7 @@
                     ShptRestService
                         .updateListItem('EmergencyResponseDetails', emergresdir.id, dt)
                         .then(function (res) {
-                            _.forEach(emergList, function (o) {
+                            _.find(emergList, function (o) {
                                 if (o.id == emergresdir.id) {
                                     o.status = 'Security';
                                 }
@@ -150,13 +162,47 @@
                 .createNewListItem('SafetyCommitteeResponses', data)
                 .then(function (response) {
                     var dt = {
-                        ResponseStatus: 'Completed'
+                        ResponseStatus: 'Programmes'
                     };
                     ShptRestService
                         .updateListItem('EmergencyResponseDetails', emergressec.id, dt)
                         .then(function (res) {
                             _.forEach(emergList, function (o) {
                                 if (o.id == emergressec.id) {
+                                    o.status = 'Programmes';
+                                }
+                            });
+                            defer.resolve(emergList);
+                        })
+                        .catch(function (error) {
+                            defer.reject(error);
+                        });
+                })
+                .catch(function (error) {
+                    defer.reject(error);
+                });
+            return defer.promise;
+        };
+
+        svc.addProgrammesComments = function (emergreshop) {
+            var defer = $q.defer();
+            var data = {
+                Title: 'Programmes Response',
+                EmergencyResponseId: emergreshop.id,
+                ProgrammesComments: emergreshop.programmescomments
+            };
+
+            ShptRestService
+                .createNewListItem('ProgrammesResponses', data)
+                .then(function (response) {
+                    var dt = {
+                        ResponseStatus: 'Completed'
+                    };
+                    ShptRestService
+                        .updateListItem('EmergencyResponseDetails', emergreshop.id, dt)
+                        .then(function (res) {
+                            _.forEach(emergList, function (o) {
+                                if (o.id == emergreshop.id) {
                                     o.status = 'Completed';
                                 }
                             });
@@ -175,23 +221,28 @@
         svc.fetchEmergencyById = function (id) {
             var defer = $q.defer();
             var promisesEmerg = [];
-            
+
             var queryParams = "$select=Id,Title,EmergencyCountry,Author/Id,Author/Title,Created,DisasterLocation,PrimaryActorsAffected,PrimaryDisaster," +
                 "SecondaryDisaster,Impact,PrimaryNeeds,PrimaryNeedsMet,EmergingNeeds,PartnersCapacity,ExistingProgrammes,StaffCapacity,CommunityVolunteers," +
-                "NationalVolunteers,InternationalVolunteers,NationalCoordination,AgenciesIdentified,ResponseStatus&$expand=Author&$filter=ID eq " + id;
+                "NationalVolunteers,InternationalVolunteers,NationalCoordination,AgenciesIdentified,ProcurementNeeded,ProcurementDeviation,ProcurementExperience," +
+                "ProcurementHighRiskItems,ProcurementIssues,ProcurementConsiderations,ResponseStatus&$expand=Author&$filter=ID eq " + id;
 
-            var query = '$select=Id,Title,EmergencyResponse/Id,EmergencyResponse/Title,Author/Id,Author/Title,Created,DisasterLocation,' +
-                'PrimaryActorsAffected,PrimaryDisaster,SecondaryDisaster,Impact,PrimaryNeeds,PrimaryNeedsMet,EmergingNeeds,PartnersCapacity,' +
-                'ExistingProgrammes,StaffCapacity,CommunityVolunteers,NationalVolunteers,InternationalVolunteers,NationalCoordination,AgenciesIdentified,' +
-                'GeneralComments,MoralResponsibility,Reputation,Accountability,ProgramGrowth&$expand=Author,EmergencyResponse&$filter=EmergencyResponse/Id eq ' + id;
+            var query = '$select=Id,Title,EmergencyResponse/Id,EmergencyResponse/Title,Author/Id,Author/Title,Created,DisasterLocation,ResponseManagerContact,' +
+                'DutyofCareContact,CommunicationsContact,PrimaryActorsAffected,PrimaryDisaster,SecondaryDisaster,Impact,PrimaryNeeds,PrimaryNeedsMet,EmergingNeeds,' +
+                'PartnersCapacity,ExistingProgrammes,StaffCapacity,CommunityVolunteers,NationalVolunteers,InternationalVolunteers,NationalCoordination,AgenciesIdentified,' +
+                'ProcurementNeeded,ProcurementDeviation,ProcurementExperience,ProcurementHighRiskItems,ProcurementIssues,ProcurementConsiderations,BudgetImplications,' +
+                'GeneralComments&$expand=Author,EmergencyResponse&$filter=EmergencyResponse/Id eq ' + id;
 
             var querysec = '$select=Id,Title,EmergencyResponse/Id,EmergencyResponse/Title,Author/Id,Author/Title,Created,SafetyComments&$expand=Author,' +
                 'EmergencyResponse&$filter=EmergencyResponse/Id eq ' + id;
 
+            var queryhop = '$select=Id,Title,EmergencyResponse/Id,EmergencyResponse/Title,Author/Id,Author/Title,Created,ProgrammesComments&$expand=Author,' +
+                'EmergencyResponse&$filter=EmergencyResponse/Id eq ' + id;
 
             promisesEmerg.push(ShptRestService.getListItems(listname, queryParams));
             promisesEmerg.push(ShptRestService.getListItems('CountryDirectorResponses', query));
             promisesEmerg.push(ShptRestService.getListItems('SafetyCommitteeResponses', querysec));
+            promisesEmerg.push(ShptRestService.getListItems('ProgrammesResponses', queryhop));
 
             $q
                 .all(promisesEmerg)
@@ -199,6 +250,7 @@
                     var data = promisesEmergRes[0];
                     var resData = promisesEmergRes[1];
                     var secData = promisesEmergRes[2];
+                    var hopData = promisesEmergRes[3];
 
                     var emerg = {};
                     if (data.results.length > 0) {
@@ -223,6 +275,12 @@
                         emerg.internationalvolunteers = data.results[0].InternationalVolunteers;
                         emerg.nationalcoordination = data.results[0].NationalCoordination;
                         emerg.agenciesidentified = data.results[0].AgenciesIdentified;
+                        emerg.procurementneeded = data.results[0].ProcurementNeeded;
+                        emerg.procurementdeviation = data.results[0].ProcurementDeviation;
+                        emerg.procurementexperience = data.results[0].ProcurementExperience;
+                        emerg.procurementhighriskitems = data.results[0].ProcurementHighRiskItems;
+                        emerg.procurementissues = data.results[0].ProcurementIssues;
+                        emerg.procurementconsiderations = data.results[0].ProcurementConsiderations;
                         emerg.status = data.results[0].ResponseStatus;
                     }
 
@@ -245,11 +303,17 @@
                         emerdir.internationalvolunteers = resData.results[0].InternationalVolunteers;
                         emerdir.nationalcoordination = resData.results[0].NationalCoordination;
                         emerdir.agenciesidentified = resData.results[0].AgenciesIdentified;
+                        emerdir.procurementneeded = resData.results[0].ProcurementNeeded;
+                        emerdir.procurementdeviation = resData.results[0].ProcurementDeviation;
+                        emerdir.procurementexperience = resData.results[0].ProcurementExperience;
+                        emerdir.procurementhighriskitems = resData.results[0].ProcurementHighRiskItems;
+                        emerdir.procurementissues = resData.results[0].ProcurementIssues;
+                        emerdir.procurementconsiderations = resData.results[0].ProcurementConsiderations;
+                        emerdir.budgetimplications = resData.results[0].BudgetImplications;
                         emerdir.generalcomments = resData.results[0].GeneralComments;
-                        emerdir.moralresponsibiity = resData.results[0].MoralResponsibility;
-                        emerdir.reputation = resData.results[0].Reputation;
-                        emerdir.accountability = resData.results[0].Accountability;
-                        emerdir.programgrowth = resData.results[0].ProgramGrowth;
+                        emerdir.responsemanagercontact = resData.results[0].ResponseManagerContact;
+                        emerdir.dutyofcarecontact = resData.results[0].DutyofCareContact;
+                        emerdir.communicationscontact = resData.results[0].CommunicationsContact;
                     }
 
                     var emersec = {};
@@ -259,10 +323,18 @@
                         emersec.safetycomments = secData.results[0].SafetyComments;
                     }
 
+                    var emerhop = {};
+                    if (hopData.results.length > 0) {
+                        emerhop.id = hopData.results[0].Id;
+                        emerhop.title = hopData.results[0].Title;
+                        emerhop.programmescomments = hopData.results[0].ProgrammesComments;
+                    }
+
                     var emergres = {};
                     emergres.emerg = emerg;
                     emergres.emerdir = emerdir;
                     emergres.emersec = emersec;
+                    emergres.emerhop = emerhop;
                     defer.resolve(emergres);
                 })
                 .catch(function (error) {
@@ -277,7 +349,7 @@
                 ShptRestService
                     .deleteListItem(listname, id)
                     .then(function () {
-                        defer.resolve(_.pull(emergList, ['id', id ]));
+                        defer.resolve(_.pull(emergList, ['id', id]));
                     })
                     .catch(function (error) {
                         defer.reject(error);
@@ -290,6 +362,26 @@
 
         svc.checkIfUserSecurity = function () {
             var userInSecGrp = false;
+            var defer = $q.defer();
+            defer.resolve(true);
+            //ShptRestService
+            //    .getUserById(curUserId)
+            //    .then(function (user) {
+            //        _.forEach(user.groups, function (g) {
+            //            if (g.Title == 'SecurityCommittee') {
+            //                userInSecGrp = true;
+            //            }
+            //        });
+            //        defer.resolve(userInSecGrp);
+            //    })
+            //    .catch(function (error) {
+            //        defer.reject(error);
+            //    });
+            return defer.promise;
+        };
+
+        svc.checkIfUserHOP = function () {
+            var userInHopGrp = false;
             var defer = $q.defer();
             defer.resolve(true);
             //ShptRestService

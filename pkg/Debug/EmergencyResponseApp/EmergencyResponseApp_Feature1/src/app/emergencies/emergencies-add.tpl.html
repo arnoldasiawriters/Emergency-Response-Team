@@ -15,6 +15,7 @@
         <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'add'">ADD EMERGENCY DETAILS</div>
         <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'cdir'">ADD COUNTRY DIRECTOR RESPONSE</div>
         <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'sec'">ADD SECURITY COMMITTEE RESPONSE</div>
+        <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'hop'">ADD PROGRAMMES RESPONSE DETAILS</div>
         <div class="panel-heading pnl-heading" ng-if="ctrl.action == 'view'">VIEW EMERGENCY RESPONSE DETAILS</div>
 
         <div class="panel-body">
@@ -110,11 +111,11 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="control-label">Disaster Location</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          name="locationofdisaster" 
-                                          ng-model="ctrl.emergency.disasterlocation" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="locationofdisaster"
+                                          ng-model="ctrl.emergency.disasterlocation"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Where has the disaster happened? Is it within a geographical area where we have programmes/ have capacity to reach?">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -126,11 +127,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Primary Actors Affected?</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          name="primaryactorsaffected" 
-                                          ng-model="ctrl.emergency.primaryactorsaffected" 
-                                          placeholder="Have our primary actors been affected?" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="primaryactorsaffected"
+                                          ng-model="ctrl.emergency.primaryactorsaffected"
+                                          placeholder="Have our primary actors been affected?"
                                           ng-disabled="ctrl.action != 'add'">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -154,12 +155,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Impact</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          name="impact" 
-                                          ng-model="ctrl.emergency.impact" 
-                                          ng-required="true" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="impact"
+                                          ng-model="ctrl.emergency.impact"
+                                          ng-required="true"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Is the level of impact according to available information significant enough to warrant a response: Lives lost/ injuries/ livelihood damage?">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -171,12 +172,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Primary Needs</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          ng-required="true" 
-                                          name="primaryneeds" 
-                                          ng-model="ctrl.emergency.primaryneeds" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          ng-required="true"
+                                          name="primaryneeds"
+                                          ng-model="ctrl.emergency.primaryneeds"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="What are the current needs (top line needs identified in early assessments by VSO/ agencies on the ground?). Do we have capacity/ experience in supporting any of those needs?">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -191,12 +192,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Primary Needs Met</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          name="primaryneedsmet" 
-                                          ng-model="ctrl.emergency.primaryneedsmet" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <label class="control-label">Are primary needs being met by other actors?</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="primaryneedsmet"
+                                          ng-model="ctrl.emergency.primaryneedsmet"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Are primary needs being met by other actors? Government/ local government/ others.">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -208,16 +209,134 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Emerging Needs</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          name="emergingneeds" 
-                                          ng-model="ctrl.emergency.emergingneeds" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="emergingneeds"
+                                          ng-model="ctrl.emergency.emergingneeds"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="What do you predict to be emerging needs (based on secondary disasters/ risks). Do we have the capacity/ experience to support any of those needs?">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
                                     <label class="btn btn-success" ng-model="ctrl.emergresdir.emergingneeds" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
                                     <label class="btn btn-success" ng-model="ctrl.emergresdir.emergingneeds" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-title">PROCUREMENT NEEDS (FILL IN THIS SECTION IF ANY PROCUREMENT IS INVOLVED)</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">State what procurement is required</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="impact"
+                                          ng-model="ctrl.emergency.procurementneeded"
+                                          ng-required="true"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          placeholder="State what goods/ services and the estimated value with currency">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementneeded" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementneeded" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">State if you will need to deviate from your CO procurement thresholds </label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          ng-required="true"
+                                          name="primaryneeds"
+                                          ng-model="ctrl.emergency.procurementdeviation"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          placeholder="provide some indication of the procedure you would want to deviate from">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementdeviation" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementdeviation" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Experience in Procuring these Goods/Services</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="primaryneedsmet"
+                                          ng-model="ctrl.emergency.procurementexperience"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          placeholder="State whether we have experience in procuring these and capacity in country?.">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementexperience" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementexperience" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">State if any high risk items need to be procured? </label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="emergingneeds"
+                                          ng-model="ctrl.emergency.procurementhighriskitems"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          placeholder="E.g. medical, food, construction, vehicles). Do note that VSO is not an expert on medical and should allow experienced medical INGO’s to lead in this area of response.">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementhighriskitems" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementhighriskitems" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">State if we foresee any issues relating to the procurement</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="primaryneedsmet"
+                                          ng-model="ctrl.emergency.procurementissues"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          placeholder="State if we foresee any issues relating to the procurement (e.g. shortages of goods, limited transport).">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementissues" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementissues" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Other Considerations</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          name="emergingneeds"
+                                          ng-model="ctrl.emergency.procurementconsiderations"
+                                          ng-disabled="ctrl.action != 'add'"
+                                          placeholder="State any other consideration that will influence Procurement or Logistics.">
+                                </textarea>
+                                <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementconsiderations" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
+                                    <label class="btn btn-success" ng-model="ctrl.emergresdir.procurementconsiderations" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'NO'">NO</label>
                                 </div>
                             </div>
                         </div>
@@ -237,10 +356,10 @@
                             <div class="form-group">
                                 <label class="control-label">Partners Capacity</label>
                                 <textarea class="form-control"
-                                          rows="4" 
-                                          ng-model="ctrl.emergency.partnerscapacity" 
-                                          name="partnerscapacity" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                          rows="4"
+                                          ng-model="ctrl.emergency.partnerscapacity"
+                                          name="partnerscapacity"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Do we have partners on the ground in the area of location? Do they have capacity to support a response? (Consider this may have been compromised by the disaster) If they are not in the areas – do they have the ability to deploy to the area?">                                    
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -252,11 +371,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Existing Programmes</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          ng-model="ctrl.emergency.existingprogrammes" 
-                                          name="existingprogrammes" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          ng-model="ctrl.emergency.existingprogrammes"
+                                          name="existingprogrammes"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Do we have existing programmes which could be adapted to support a response or would the response need to be additional to existing work?">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -272,11 +391,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Staff Capacity</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          ng-model="ctrl.emergency.staffcapacity" 
-                                          name="staffcapacity" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          ng-model="ctrl.emergency.staffcapacity"
+                                          name="staffcapacity"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="If additional, do we have staff capacity to support needs assessment, project design, coordination and management? (Consider implications for ongoing work)">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -289,10 +408,10 @@
                             <div class="form-group">
                                 <label class="control-label">Community Volunteers</label>
                                 <textarea class="form-control"
-                                          rows="4" 
-                                          ng-model="ctrl.emergency.communityvolunteers" 
-                                          name="communityvolunteers" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                          rows="4"
+                                          ng-model="ctrl.emergency.communityvolunteers"
+                                          name="communityvolunteers"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Do we have community volunteers on the ground? (If yes, consider their support needs? Can any of these be met through support from VSO?)">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -310,10 +429,10 @@
                             <div class="form-group">
                                 <label class="control-label">National Volunteers</label>
                                 <textarea class="form-control"
-                                          rows="5" 
-                                          ng-model="ctrl.emergency.nationalvolunteers" 
-                                          name="nationalvolunteers" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                          rows="5"
+                                          ng-model="ctrl.emergency.nationalvolunteers"
+                                          name="nationalvolunteers"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Do we have national volunteers on the ground already working without security risk/ can we deploy?(Consider; if on the ground, consider the skills they are contributing and support needs/ what security needs. If to be deployed, consider what skills they can meet) No: On the ground but high risk/ Can’t deploy due to high  risks: consider not deploying/ advising evacuation)">
                                 </textarea>
                                 <div class="btn-group pull-right dirres ng-scope" ng-if="ctrl.action != 'add'">
@@ -325,11 +444,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">International Volunteers</label>
-                                <textarea class="form-control" 
-                                          rows="5" 
-                                          ng-model="ctrl.emergency.internationalvolunteers" 
-                                          name="internationalvolunteers" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="5"
+                                          ng-model="ctrl.emergency.internationalvolunteers"
+                                          name="internationalvolunteers"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Do we have international volunteers on the ground/ that can be deployed?(If on the ground, consider how they responding, what skills are they contributing and what are their support/ security needs. If to be deployed what skills could they bring if deployed? (Security prompt: If security risks: apply security assessment – if high risk consider not deploying/ advising evacuation)">
                                 </textarea>
                                 <div class="btn-group pull-right dirres ng-scope" ng-if="ctrl.action != 'add'">
@@ -353,11 +472,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">National level Coordination</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          ng-model="ctrl.emergency.nationalcoordination" 
-                                          name="nationalcoordination" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <textarea class="form-control"
+                                          rows="4"
+                                          ng-model="ctrl.emergency.nationalcoordination"
+                                          name="nationalcoordination"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Are we engaging in national level coordination structures (government/ non-government or are there opportunities to coordinate?">
                                 </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
@@ -368,12 +487,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Agencies Identified</label>
-                                <textarea class="form-control" 
-                                          rows="4" 
-                                          ng-model="ctrl.emergency.agenciesidentified" 
-                                          name="agenciesidentified" 
-                                          ng-disabled="ctrl.action != 'add'" 
+                                <label class="control-label">Collaboration and Coordination</label>
+                                <textarea class="form-control"
+                                          rows="4"
+                                          ng-model="ctrl.emergency.agenciesidentified"
+                                          name="agenciesidentified"
+                                          ng-disabled="ctrl.action != 'add'"
                                           placeholder="Have we identified any agencies with which it would be advisable to collaborate/ coordinate (working in same target areas/ meeting similar/ complementary needs.">                                    </textarea>
                                 <div class="btn-group pull-right dirres" ng-if="ctrl.action != 'add'">
                                     <label class="btn btn-success" ng-model="ctrl.emergresdir.agenciesidentified" ng-disabled="ctrl.action != 'cdir'" uib-btn-radio="'GO'">GO</label>
@@ -393,69 +512,67 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">General Comments</label>
-                                    <textarea class="form-control" 
-                                              rows="4" 
-                                              ng-model="ctrl.emergresdir.generalcomments" 
-                                              name="generalcomments" 
-                                              ng-disabled="ctrl.action != 'cdir'" 
+                                    <label class="control-label">Budget Implications</label>
+                                    <textarea class="form-control"
+                                              rows="4"
+                                              ng-model="ctrl.emergresdir.budgetimplications"
+                                              name="generalcomments"
+                                              ng-disabled="ctrl.action != 'cdir'"
+                                              placeholder="Country Director Recommendation on Budget Implications">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Country Directors / Go/ No Go (top line initial response concept including key activities and timeframe)</label>
+                                    <textarea class="form-control"
+                                              rows="4"
+                                              ng-model="ctrl.emergresdir.generalcomments"
+                                              name="generalcomments"
+                                              ng-disabled="ctrl.action != 'cdir'"
                                               placeholder="Country Director Recommendation: Go/No (top line initial response concept)">
                                     </textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
-                                <label class="control-label">Moral Responsibility</label>
+                            <div class="col-md-4">
+                                <label class="control-label">Emergency Response Manager Contact</label>
                                 <div class="form-group">
-                                    <textarea class="form-control"
-                                              rows="4" 
-                                              ng-model="ctrl.emergresdir.moralresponsibiity" 
-                                              name="moralresponsibiity" 
-                                              ng-disabled="ctrl.action != 'cdir'">
-                                    </textarea>
+                                    <input class="form-control" type="text"
+                                           name="emergresponsemanager"
+                                           ng-model="ctrl.emergresdir.responsemanagercontact"
+                                           placeholder="Enter Emergency Response Manager Contact."
+                                           ng-disabled="ctrl.action != 'cdir'">
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <label class="control-label">Reputation </label>
+                            <div class="col-md-4">
+                                <label class="control-label">Duty of Care Lead Contact</label>
                                 <div class="form-group">
-                                    <textarea class="form-control"
-                                              rows="4" 
-                                              ng-model="ctrl.emergresdir.reputation" 
-                                              name="reputation" 
-                                              ng-disabled="ctrl.action != 'cdir'">
-                                    </textarea>
+                                    <input class="form-control" type="text"
+                                           name="emergresponsemanager"
+                                           ng-model="ctrl.emergresdir.dutyofcarecontact"
+                                           placeholder="Enter Duty of Care Lead Contact."
+                                           ng-disabled="ctrl.action != 'cdir'">
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <label class="control-label">Accountability</label>
+                            <div class="col-md-4">
+                                <label class="control-label">Communications Lead Contact</label>
                                 <div class="form-group">
-                                    <textarea class="form-control" 
-                                              rows="4" 
-                                              ng-model="ctrl.emergresdir.accountability" 
-                                              name="accountability" 
-                                              ng-disabled="ctrl.action != 'cdir'">
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="control-label">Programme growth</label>
-                                <div class="form-group">
-                                    <textarea class="form-control"
-                                              rows="4" 
-                                              ng-model="ctrl.emergresdir.programgrowth" 
-                                              name="programgrowth" 
-                                              ng-disabled="ctrl.action != 'cdir'">
-                                    </textarea>
+                                    <input class="form-control" type="text"
+                                           name="emergresponsemanager"
+                                           ng-model="ctrl.emergresdir.communicationscontact"
+                                           placeholder="Enter Communications Lead Contact."
+                                           ng-disabled="ctrl.action != 'cdir'">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-if="ctrl.action != 'add' && (ctrl.emergency.status == 'Security' || ctrl.emergency.status == 'Completed')">
+            <div ng-if="ctrl.emergency.status == 'Security' || ctrl.emergency.status == 'Programmes'  || ctrl.emergency.status == 'Completed'">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-title">SAFETY COMMITTEE RESPONSE</div>
@@ -468,10 +585,34 @@
                                 <div class="form-group">
                                     <label class="control-label">Safety Committee Comments</label>
                                     <textarea class="form-control"
-                                              rows="4" 
-                                              ng-model="ctrl.emergressec.safetycomments" 
-                                              name="generalcomments" ng-disabled="ctrl.action != 'sec'" 
-                                              placeholder="Safety Committee Recommendation">
+                                              rows="4"
+                                              ng-model="ctrl.emergressec.safetycomments"
+                                              name="safetycomments" ng-disabled="ctrl.action != 'sec'"
+                                              placeholder="Enter Safety Committee Recommendation">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="ctrl.emergency.status == 'Programmes' || ctrl.emergency.status == 'Completed'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-title">PROGRAMMES RESPONSE</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Programmes Comments</label>
+                                    <textarea class="form-control"
+                                              rows="4"
+                                              ng-model="ctrl.emergreshop.programmescomments"
+                                              name="programmescomments" ng-disabled="ctrl.action != 'hop'"
+                                              placeholder="Enter Programmes Comments/Recommendations">
                                     </textarea>
                                 </div>
                             </div>
@@ -480,7 +621,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer clearfix ng-hide" ng-show="ctrl.action == 'add' || ctrl.action == 'cdir' || ctrl.action == 'sec'">
+        <div class="panel-footer clearfix ng-hide" ng-hide="ctrl.action == 'completed' || ctrl.action == 'view'">
             <div class="form-group pull-right">
                 <a href="" class="btn btn-success" ng-disabled="frm.$invalid" ng-click="ctrl.addEmergency()">Save and close</a>
                 <a href="#listEmergencies" class="btn btn-warning ">Cancel</a>

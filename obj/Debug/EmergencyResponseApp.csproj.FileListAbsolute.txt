@@ -2,3 +2,7 @@ C:\Users\ARNOLD\source\repos\EmergencyResponseApp\bin\Debug\EmergencyResponseApp
 C:\Users\ARNOLD\source\repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.csprojAssemblyReference.cache
 C:\Users\ARNOLD\source\repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.dll
 C:\Users\ARNOLD\source\repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.pdb
+C:\Users\arnold.shangala\Source\Repos\EmergencyResponseApp\bin\Debug\EmergencyResponseApp.pdb
+C:\Users\arnold.shangala\Source\Repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.csprojAssemblyReference.cache
+C:\Users\arnold.shangala\Source\Repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.dll
+C:\Users\arnold.shangala\Source\Repos\EmergencyResponseApp\obj\Debug\EmergencyResponseApp.pdb
